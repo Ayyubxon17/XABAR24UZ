@@ -2,130 +2,238 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="XABAR24UZ — O‘zbekiston va dunyo yangiliklari">
-  <title>XABAR24UZ — Jahon yangiliklari</title>
-  <link rel="stylesheet" href="assets/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="XABAR24UZ — O‘zbekiston va dunyo yangiliklari">
+<title>XABAR24UZ — Jahon yangiliklari</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+.languages button {
+  background: transparent;
+  color: white;
+  border: 0;
+  padding: 7px 11px;
+  margin-left: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.languages button.active {
+  background: #d71920;
+}
+</style>
 </head>
 <body>
 
 <header class="top-header">
-  <div class="header-inner">
-    <a class="logo" href="index.html">XABAR<span>24</span>UZ</a>
-    <div class="header-right">
-      <span>O‘ZBEKISTON VA DUNYO YANGILIKLARI</span>
-      <div class="languages">
-        <a class="active" href="#">UZ</a>
-        <a href="#">RU</a>
-        <a href="#">EN</a>
-      </div>
-    </div>
-  </div>
+<div class="header-inner">
+<a class="logo" href="index.html">XABAR<span>24</span>UZ</a>
+<div class="header-right">
+<span data-i18n="tagline">O‘ZBEKISTON VA DUNYO YANGILIKLARI</span>
+<div class="languages">
+<button class="active" data-lang="uz">UZ</button>
+<button data-lang="ru">RU</button>
+<button data-lang="en">EN</button>
+</div>
+</div>
+</div>
 </header>
 
 <nav class="main-nav">
-  <div class="nav-inner">
-    <a href="#">BOSH SAHIFA</a>
-    <a href="#">O‘ZBEKISTON</a>
-    <a href="#">DUNYO</a>
-    <a href="#">SIYOSAT</a>
-    <a href="#">IQTISODIYOT</a>
-    <a href="#">TEXNOLOGIYA</a>
-    <a href="#">SPORT</a>
-  </div>
+<div class="nav-inner">
+<a href="#" data-i18n="home">BOSH SAHIFA</a>
+<a href="#" data-i18n="uzbekistan">O‘ZBEKISTON</a>
+<a href="#" data-i18n="world">DUNYO</a>
+<a href="#" data-i18n="politics">SIYOSAT</a>
+<a href="#" data-i18n="economy">IQTISODIYOT</a>
+<a href="#" data-i18n="technology">TEXNOLOGIYA</a>
+<a href="#" data-i18n="sport">SPORT</a>
+</div>
 </nav>
 
 <div class="breaking">
-  <strong>SO‘NGGI YANGILIKLAR</strong>
-  <span>XABAR24UZ — O‘zbekiston va dunyo yangiliklari</span>
+<strong data-i18n="breaking">SO‘NGGI YANGILIKLAR</strong>
+<span data-i18n="breakingText">XABAR24UZ — O‘zbekiston va dunyo yangiliklari</span>
 </div>
 
 <main class="container">
 
-  <section class="section-heading">
-    <h1>ASOSIY YANGILIKLAR</h1>
-    <span>JAHON AXBOROTI</span>
-  </section>
+<section class="section-heading">
+<h1 data-i18n="mainNews">ASOSIY YANGILIKLAR</h1>
+<span data-i18n="information">JAHON AXBOROTI</span>
+</section>
 
-  <section class="hero-grid">
-    <article class="hero-card">
-      <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200" alt="Jahon yangiliklari">
-      <div class="hero-caption">
-        <span class="category">JAHON</span>
-        <h2>XABAR24UZ — dunyo yangiliklari markazi</h2>
-        <p>O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
-      </div>
-    </article>
+<section class="hero-grid">
+<article class="hero-card">
+<img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200" alt="News">
+<div class="hero-caption">
+<span class="category" data-i18n="world">JAHON</span>
+<h2 data-i18n="heroTitle">XABAR24UZ — dunyo yangiliklari markazi</h2>
+<p data-i18n="heroText">O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
+</div>
+</article>
 
-    <aside class="side-news">
-      <h2>SO‘NGGI XABARLAR</h2>
-      <article>
-        <span>O‘ZBEKISTON</span>
-        <h3>Mamlakatdagi muhim yangiliklar</h3>
-      </article>
-      <article>
-        <span>JAHON</span>
-        <h3>Dunyodagi so‘nggi voqealar</h3>
-      </article>
-      <article>
-        <span>IQTISODIYOT</span>
-        <h3>Jahon iqtisodiyotidagi yangiliklar</h3>
-      </article>
-    </aside>
-  </section>
+<aside class="side-news">
+<h2 data-i18n="latest">SO‘NGGI XABARLAR</h2>
+<article>
+<span data-i18n="uzbekistan">O‘ZBEKISTON</span>
+<h3 data-i18n="side1">Mamlakatdagi muhim yangiliklar</h3>
+</article>
+<article>
+<span data-i18n="world">JAHON</span>
+<h3 data-i18n="side2">Dunyodagi so‘nggi voqealar</h3>
+</article>
+<article>
+<span data-i18n="economy">IQTISODIYOT</span>
+<h3 data-i18n="side3">Jahon iqtisodiyotidagi yangiliklar</h3>
+</article>
+</aside>
+</section>
 
-  <section class="section-heading">
-    <h2>O‘ZBEKISTON</h2>
-  </section>
+<section class="section-heading">
+<h2 data-i18n="uzbekistan">O‘ZBEKISTON</h2>
+</section>
 
-  <section class="news-grid">
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=600" alt="Shahar">
-      <span class="category">O‘ZBEKISTON</span>
-      <h3>O‘zbekistondagi muhim voqealar</h3>
-    </article>
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" alt="Shahar binolari">
-      <span class="category">IQTISODIYOT</span>
-      <h3>Iqtisodiyot va biznes yangiliklari</h3>
-    </article>
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Texnologiya">
-      <span class="category">TEXNOLOGIYA</span>
-      <h3>Texnologiya olamidagi yangiliklar</h3>
-    </article>
-  </section>
+<section class="news-grid">
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=600" alt="City">
+<span class="category" data-i18n="uzbekistan">O‘ZBEKISTON</span>
+<h3 data-i18n="card1">O‘zbekistondagi muhim voqealar</h3>
+</article>
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" alt="Buildings">
+<span class="category" data-i18n="economy">IQTISODIYOT</span>
+<h3 data-i18n="card2">Iqtisodiyot va biznes yangiliklari</h3>
+</article>
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Technology">
+<span class="category" data-i18n="technology">TEXNOLOGIYA</span>
+<h3 data-i18n="card3">Texnologiya olamidagi yangiliklar</h3>
+</article>
+</section>
 
-  <section class="section-heading">
-    <h2>JAHON YANGILIKLARI</h2>
-  </section>
+<section class="section-heading">
+<h2 data-i18n="worldNews">JAHON YANGILIKLARI</h2>
+</section>
 
-  <section class="news-grid">
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" alt="Xalqaro siyosat">
-      <span class="category">SIYOSAT</span>
-      <h3>Xalqaro siyosat va diplomatiya</h3>
-    </article>
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600" alt="Biznes">
-      <span class="category">JAHON</span>
-      <h3>Dunyodagi muhim xabarlar</h3>
-    </article>
-    <article class="news-card">
-      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Texnika">
-      <span class="category">TEXNOLOGIYA</span>
-      <h3>Ilm-fan va yangi texnologiyalar</h3>
-    </article>
-  </section>
-
+<section class="news-grid">
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" alt="Politics">
+<span class="category" data-i18n="politics">SIYOSAT</span>
+<h3 data-i18n="card4">Xalqaro siyosat va diplomatiya</h3>
+</article>
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600" alt="Business">
+<span class="category" data-i18n="world">JAHON</span>
+<h3 data-i18n="card5">Dunyodagi muhim xabarlar</h3>
+</article>
+<article class="news-card">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Technology">
+<span class="category" data-i18n="technology">TEXNOLOGIYA</span>
+<h3 data-i18n="card6">Ilm-fan va yangi texnologiyalar</h3>
+</article>
+</section>
 </main>
 
 <footer>
-  <div class="footer-logo">XABAR<span>24</span>UZ</div>
-  <p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
-  <p>© 2026 XABAR24UZ. Barcha huquqlar himoyalangan.</p>
+<div class="footer-logo">XABAR<span>24</span>UZ</div>
+<p data-i18n="footerText">O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
+<p>© 2026 XABAR24UZ. <span data-i18n="rights">Barcha huquqlar himoyalangan.</span></p>
 </footer>
 
+<script>
+const translations = {
+uz: {
+tagline:"O‘ZBEKISTON VA DUNYO YANGILIKLARI",
+home:"BOSH SAHIFA", uzbekistan:"O‘ZBEKISTON",
+world:"JAHON", politics:"SIYOSAT", economy:"IQTISODIYOT",
+technology:"TEXNOLOGIYA", sport:"SPORT",
+breaking:"SO‘NGGI YANGILIKLAR",
+breakingText:"XABAR24UZ — O‘zbekiston va dunyo yangiliklari",
+mainNews:"ASOSIY YANGILIKLAR", information:"JAHON AXBOROTI",
+heroTitle:"XABAR24UZ — dunyo yangiliklari markazi",
+heroText:"O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.",
+latest:"SO‘NGGI XABARLAR",
+side1:"Mamlakatdagi muhim yangiliklar",
+side2:"Dunyodagi so‘nggi voqealar",
+side3:"Jahon iqtisodiyotidagi yangiliklar",
+worldNews:"JAHON YANGILIKLARI",
+card1:"O‘zbekistondagi muhim voqealar",
+card2:"Iqtisodiyot va biznes yangiliklari",
+card3:"Texnologiya olamidagi yangiliklar",
+card4:"Xalqaro siyosat va diplomatiya",
+card5:"Dunyodagi muhim xabarlar",
+card6:"Ilm-fan va yangi texnologiyalar",
+footerText:"O‘zbekiston va dunyo yangiliklari — uch tilda.",
+rights:"Barcha huquqlar himoyalangan."
+},
+ru: {
+tagline:"НОВОСТИ УЗБЕКИСТАНА И МИРА",
+home:"ГЛАВНАЯ", uzbekistan:"УЗБЕКИСТАН",
+world:"МИР", politics:"ПОЛИТИКА", economy:"ЭКОНОМИКА",
+technology:"ТЕХНОЛОГИИ", sport:"СПОРТ",
+breaking:"ПОСЛЕДНИЕ НОВОСТИ",
+breakingText:"XABAR24UZ — новости Узбекистана и мира",
+mainNews:"ГЛАВНЫЕ НОВОСТИ", information:"МИРОВАЯ ИНФОРМАЦИЯ",
+heroTitle:"XABAR24UZ — центр мировых новостей",
+heroText:"Следите за важными событиями в Узбекистане и мире.",
+latest:"ПОСЛЕДНИЕ СООБЩЕНИЯ",
+side1:"Важные новости страны",
+side2:"Последние события в мире",
+side3:"Новости мировой экономики",
+worldNews:"МИРОВЫЕ НОВОСТИ",
+card1:"Важные события в Узбекистане",
+card2:"Новости экономики и бизнеса",
+card3:"Новости мира технологий",
+card4:"Международная политика и дипломатия",
+card5:"Важные новости мира",
+card6:"Наука и новые технологии",
+footerText:"Новости Узбекистана и мира — на трёх языках.",
+rights:"Все права защищены."
+},
+en: {
+tagline:"UZBEKISTAN AND WORLD NEWS",
+home:"HOME", uzbekistan:"UZBEKISTAN",
+world:"WORLD", politics:"POLITICS", economy:"ECONOMY",
+technology:"TECHNOLOGY", sport:"SPORT",
+breaking:"BREAKING NEWS",
+breakingText:"XABAR24UZ — Uzbekistan and world news",
+mainNews:"TOP STORIES", information:"WORLD INFORMATION",
+heroTitle:"XABAR24UZ — your world news center",
+heroText:"Follow important events in Uzbekistan and around the world.",
+latest:"LATEST NEWS",
+side1:"Important national news",
+side2:"Latest events around the world",
+side3:"World economy news",
+worldNews:"WORLD NEWS",
+card1:"Important events in Uzbekistan",
+card2:"Economy and business news",
+card3:"News from the world of technology",
+card4:"International politics and diplomacy",
+card5:"Important world headlines",
+card6:"Science and new technologies",
+footerText:"Uzbekistan and world news — in three languages.",
+rights:"All rights reserved."
+}
+};
+
+function setLanguage(lang) {
+document.documentElement.lang = lang;
+document.querySelectorAll("[data-i18n]").forEach(element => {
+const key = element.dataset.i18n;
+if (translations[lang][key]) {
+element.textContent = translations[lang][key];
+}
+});
+document.querySelectorAll(".languages button").forEach(button => {
+button.classList.toggle("active", button.dataset.lang === lang);
+});
+}
+
+document.querySelectorAll(".languages button").forEach(button => {
+button.addEventListener("click", () => setLanguage(button.dataset.lang));
+});
+</script>
+
 </body>
-</html>
+  </html>
+  
