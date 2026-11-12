@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XABAR24UZ | Jahon yangiliklari</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f3f3f3;color:#171717;font-family:Arial,sans-serif}
+header{background:#111;color:white;padding:18px 5%}
+.logo{font-size:30px;font-weight:bold}
+.logo span{background:#d71920;padding:5px 8px}
+nav{background:#202020;color:white;padding:13px 5%;display:flex;gap:22px;overflow:auto;white-space:nowrap}
+nav a{color:white;text-decoration:none;font-weight:bold}
+.breaking{background:#d71920;color:white;padding:12px 5%;font-weight:bold}
+.container{max-width:1100px;margin:22px auto;padding:0 15px}
+h1{font-size:28px}
+.main{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+.hero{background:#171717;color:white}
+.hero img{width:100%;height:280px;object-fit:cover}
+.hero-content{padding:20px}
+.hero h2{font-size:27px}
+.tag{color:#d71920;font-weight:bold}
+.side,.news-card{background:white;padding:16px;margin-bottom:15px}
+.news-card h3{margin:8px 0}
+.news-list{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.news-card img{width:100%;height:140px;object-fit:cover}
+footer{background:#111;color:white;text-align:center;padding:25px;margin-top:35px}
+button{background:#d71920;color:white;border:0;padding:9px 12px;border-radius:4px}
+@media(max-width:700px){
+.main{grid-template-columns:1fr}
+.news-list{grid-template-columns:1fr 1fr}
+.hero img{height:210px}
+.hero h2{font-size:22px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo"><span>XABAR</span>24UZ</div>
+<p id="subtitle">Jahon yangiliklari — uch tilda</p>
+</header>
+
+<nav>
+<a href="#">BOSH SAHIFA</a>
+<a href="#uz">O‘ZBEKISTON</a>
+<a href="#world">JAHON</a>
+<a href="#economy">IQTISODIYOT</a>
+<a href="#technology">TEXNOLOGIYA</a>
+<a href="#sport">SPORT</a>
+</nav>
+
+<div class="breaking">SO‘NGGI YANGILIKLAR | XABAR24UZ</div>
+
+<div class="container">
+<div style="display:flex;justify-content:flex-end;gap:8px">
+<button onclick="setLang('uz')">UZ</button>
+<button onclick="setLang('ru')">RU</button>
+<button onclick="setLang('en')">EN</button>
+</div>
+
+<h1 id="topTitle">Asosiy yangiliklar</h1>
+
+<div class="main">
+<section class="hero">
+<img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1000" alt="Jahon yangiliklari">
+<div class="hero-content">
+<div class="tag">JAHON</div>
+<h2 id="headline">XABAR24UZ — dunyo yangiliklari bir sahifada</h2>
+<p id="description">O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
+</div>
+</section>
+
+<aside>
+<div class="side">
+<div class="tag">O‘ZBEKISTON</div>
+<h3>O‘zbekistondagi muhim voqealar</h3>
+<p>Yangiliklar va rasmiy xabarlar shu bo‘limda beriladi.</p>
+</div>
+<div class="side">
+<div class="tag">JAHON</div>
+<h3>Xalqaro yangiliklar</h3>
+<p>Dunyo bo‘ylab muhim voqealar.</p>
+</div>
+</aside>
+</div>
+
+<h1 id="latest">So‘nggi xabarlar</h1>
+<div class="news-list">
+<div class="news-card" id="uz">
+<img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" alt="O‘zbekiston">
+<div class="tag">O‘ZBEKISTON</div>
+<h3>O‘zbekiston yangiliklari</h3>
+<p>Mamlakatdagi yangiliklar va rasmiy xabarlar.</p>
+</div>
+<div class="news-card" id="world">
+<img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Dunyo">
+<div class="tag">JAHON</div>
+<h3>Jahon sahnasidagi voqealar</h3>
+<p>Xalqaro yangiliklar va tahlillar.</p>
+</div>
+<div class="news-card" id="technology">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Texnologiya">
+<div class="tag">TEXNOLOGIYA</div>
+<h3>Yangi texnologiyalar</h3>
+<p>Ilm-fan va texnologiya olamidagi yangiliklar.</p>
+</div>
+</div>
+</div>
+
+<footer>
+<strong>XABAR24UZ</strong>
+<p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
+<p>© 2026 XABAR24UZ</p>
+</footer>
+
+<script>
+function setLang(lang){
+const words={
+uz:["Jahon yangiliklari — uch tilda","Asosiy yangiliklar","XABAR24UZ — dunyo yangiliklari bir sahifada","O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.","So‘nggi xabarlar"],
+ru:["Мировые новости — на трёх языках","Главные новости","XABAR24UZ — мировые новости на одной странице","Следите за важными событиями Узбекистана и мира.","Последние новости"],
+en:["World news — in three languages","Top stories","XABAR24UZ — world news in one place","Follow important events in Uzbekistan and around the world.","Latest news"]
+};
+let w=words[lang];
+document.getElementById("subtitle").textContent=w[0];
+document.getElementById("topTitle").textContent=w[1];
+document.getElementById("headline").textContent=w[2];
+document.getElementById("description").textContent=w[3];
+document.getElementById("latest").textContent=w[4];
+}
+</script>
+</body>
+</html>
