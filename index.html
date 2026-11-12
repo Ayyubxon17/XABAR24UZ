@@ -1,9 +1,131 @@
-<!doctype html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XABAR24UZ</title><link rel="stylesheet" href="assets/style.css"></head><body>
-<header><div class="logo"><b>XABAR</b>24UZ</div><p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p></header>
-<nav><a href="#latest">SO‘NGGI XABARLAR</a><a href="#uz">O‘ZBEKISTON</a><a href="#world">JAHON</a><a href="#economy">IQTISODIYOT</a><a href="#tech">TEXNOLOGIYA</a><a href="#sport">SPORT</a></nav>
-<div class="ticker">SO‘NGGI YANGILIKLAR | XABAR24UZ</div><main><div class="langs"><button data-lang="uz">UZ</button><button data-lang="ru">RU</button><button data-lang="en">EN</button></div>
-<section class="hero"><small>ASOSIY MAVZU</small><h1>O‘zbekiston va dunyodagi muhim voqealar</h1><p>Muhim xabarlar, tekshirilgan manbalar va qisqa sharhlar — bir sahifada.</p></section>
-<section id="latest"><h2>So‘nggi xabarlar</h2><div id="news" class="grid"><article class="story">Yangiliklar bazasi ulanmoqda. Hozircha tasdiqlangan xabarlar yo‘q.</article></div></section>
-<p class="note">Xabarlar manbaga havola bilan beriladi. Tahririyat tekshiruvi va tasdig‘idan keyingina e’lon qilinadi.</p></main>
-<footer><b>XABAR24UZ</b><p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p><a href="admin.html">Tahririyatga kirish</a><small>© 2026 XABAR24UZ</small></footer>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/config.js"></script><script src="assets/site.js"></script></body></html>
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="XABAR24UZ — O‘zbekiston va dunyo yangiliklari">
+  <title>XABAR24UZ — Jahon yangiliklari</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+
+<header class="top-header">
+  <div class="header-inner">
+    <a class="logo" href="index.html">XABAR<span>24</span>UZ</a>
+    <div class="header-right">
+      <span>O‘ZBEKISTON VA DUNYO YANGILIKLARI</span>
+      <div class="languages">
+        <a class="active" href="#">UZ</a>
+        <a href="#">RU</a>
+        <a href="#">EN</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<nav class="main-nav">
+  <div class="nav-inner">
+    <a href="#">BOSH SAHIFA</a>
+    <a href="#">O‘ZBEKISTON</a>
+    <a href="#">DUNYO</a>
+    <a href="#">SIYOSAT</a>
+    <a href="#">IQTISODIYOT</a>
+    <a href="#">TEXNOLOGIYA</a>
+    <a href="#">SPORT</a>
+  </div>
+</nav>
+
+<div class="breaking">
+  <strong>SO‘NGGI YANGILIKLAR</strong>
+  <span>XABAR24UZ — O‘zbekiston va dunyo yangiliklari</span>
+</div>
+
+<main class="container">
+
+  <section class="section-heading">
+    <h1>ASOSIY YANGILIKLAR</h1>
+    <span>JAHON AXBOROTI</span>
+  </section>
+
+  <section class="hero-grid">
+    <article class="hero-card">
+      <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200" alt="Jahon yangiliklari">
+      <div class="hero-caption">
+        <span class="category">JAHON</span>
+        <h2>XABAR24UZ — dunyo yangiliklari markazi</h2>
+        <p>O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
+      </div>
+    </article>
+
+    <aside class="side-news">
+      <h2>SO‘NGGI XABARLAR</h2>
+      <article>
+        <span>O‘ZBEKISTON</span>
+        <h3>Mamlakatdagi muhim yangiliklar</h3>
+      </article>
+      <article>
+        <span>JAHON</span>
+        <h3>Dunyodagi so‘nggi voqealar</h3>
+      </article>
+      <article>
+        <span>IQTISODIYOT</span>
+        <h3>Jahon iqtisodiyotidagi yangiliklar</h3>
+      </article>
+    </aside>
+  </section>
+
+  <section class="section-heading">
+    <h2>O‘ZBEKISTON</h2>
+  </section>
+
+  <section class="news-grid">
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=600" alt="Shahar">
+      <span class="category">O‘ZBEKISTON</span>
+      <h3>O‘zbekistondagi muhim voqealar</h3>
+    </article>
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600" alt="Shahar binolari">
+      <span class="category">IQTISODIYOT</span>
+      <h3>Iqtisodiyot va biznes yangiliklari</h3>
+    </article>
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600" alt="Texnologiya">
+      <span class="category">TEXNOLOGIYA</span>
+      <h3>Texnologiya olamidagi yangiliklar</h3>
+    </article>
+  </section>
+
+  <section class="section-heading">
+    <h2>JAHON YANGILIKLARI</h2>
+  </section>
+
+  <section class="news-grid">
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?w=600" alt="Xalqaro siyosat">
+      <span class="category">SIYOSAT</span>
+      <h3>Xalqaro siyosat va diplomatiya</h3>
+    </article>
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=600" alt="Biznes">
+      <span class="category">JAHON</span>
+      <h3>Dunyodagi muhim xabarlar</h3>
+    </article>
+    <article class="news-card">
+      <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=600" alt="Texnika">
+      <span class="category">TEXNOLOGIYA</span>
+      <h3>Ilm-fan va yangi texnologiyalar</h3>
+    </article>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-logo">XABAR<span>24</span>UZ</div>
+  <p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
+  <p>© 2026 XABAR24UZ. Barcha huquqlar himoyalangan.</p>
+</footer>
+
+</body>
+</html>
