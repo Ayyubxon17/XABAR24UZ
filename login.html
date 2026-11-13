@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XABAR24UZ — Admin Login</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body class="login-page">
+
+  <div class="login-top">
+    <div class="brand">XABAR<span>24UZ</span></div>
+    <span>NEWSROOM ACCESS</span>
+  </div>
+
+  <main class="login-wrap">
+    <div class="login-box">
+      <div class="login-red-line"></div>
+      <div class="eyebrow">XABAR24UZ / ADMINISTRATION</div>
+      <h1>Admin tizimiga kirish</h1>
+      <p class="login-description">
+        Boshqaruv markaziga kirish uchun ma’lumotlaringizni kiriting.
+      </p>
+
+      <form id="loginForm">
+        <label for="email">ADMIN EMAIL</label>
+        <input id="email" type="email" placeholder="Email manzilingiz" required>
+
+        <label for="password">PAROL</label>
+        <input id="password" type="password" placeholder="Parolingiz" required>
+
+        <button type="submit" id="signIn">TIZIMGA KIRISH →</button>
+        <p id="msg"></p>
+      </form>
+    </div>
+
+    <p class="login-footer">
+      XABAR24UZ © 2026 · SECURE ADMIN ACCESS
+    </p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="assets/config.js"></script>
+  <script>
+    const client = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
+
+    const form = document.getElementById("loginForm");
+    const msg = document.getElementById("msg");
+    const button = document.getElementById("signIn");
+
+    form.addEventListener("submit", async function(event) {
+      event.preventDefault();
+
+      button.disabled = true;
+      button.textContent = "TEKSHIRILMOQDA...";
+      msg.textContent = "";
+
+      try {
+        const { data, error } = await client.auth.signInWithPassword({
+          email: document.getElementById("email").value.trim(),
+          password: document.getElementById("password").value
+        });
+
+        if (error) throw error;
+        if (!data.session) throw new Error("Kirish amalga oshmadi.");
+
+        window.location.href = "admin.html";
+      } catch (error) {
+        msg.textContent = "Xatolik: " + error.message;
+        button.disabled = false;
+        button.textContent = "TIZIMGA KIRISH →";
+      }
+    });
+  </script>
+</body>
+</html>
