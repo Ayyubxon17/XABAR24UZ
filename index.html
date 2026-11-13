@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="XABAR24UZ — Jahon yangiliklari">
+<meta name="description" content="XABAR24UZ — O‘zbekiston va dunyo yangiliklari">
 <title>XABAR24UZ — Jahon yangiliklari</title>
 <link rel="stylesheet" href="assets/style.css">
 
 <style>
 .admin-area {
+  display:none;
   max-width:1100px;
   margin:25px auto;
   padding:15px;
-  display:none;
 }
 .admin-box {
   background:#171717;
@@ -21,12 +21,13 @@
   border-top:4px solid #d71920;
   border-radius:5px;
 }
-.admin-box input,.admin-box textarea,.admin-box select {
+.admin-box input,.admin-box textarea {
+  display:block;
   width:100%;
   box-sizing:border-box;
   padding:12px;
-  margin:6px 0 14px;
-  border:1px solid #555;
+  margin:7px 0 15px;
+  border:1px solid #777;
   border-radius:4px;
 }
 .admin-box button {
@@ -61,19 +62,28 @@
   background:white;
   color:#222;
   box-shadow:0 2px 8px #0002;
+  overflow:hidden;
 }
 .dynamic-card img {
   width:100%;
-  height:180px;
+  height:190px;
   object-fit:cover;
 }
 .dynamic-card h3,.dynamic-card p {
   padding:0 12px;
 }
-#adminPanel,#loginPanel {display:none}
-#editorPanel {display:none}
-#adminPanel input,#adminPanel textarea {background:white;color:#111}
-#adminPanel textarea {min-height:100px}
+.dynamic-card small {
+  display:block;
+  padding:10px 12px;
+  color:#777;
+}
+#loginPanel,#adminPanel,#editorPanel {
+  display:none;
+}
+.admin-message {
+  color:#ffcc66;
+  overflow-wrap:anywhere;
+}
 </style>
 </head>
 
@@ -95,59 +105,67 @@
 
 <nav class="main-nav">
 <div class="nav-inner">
-<a href="#">BOSH SAHIFA</a>
-<a href="#">O‘ZBEKISTON</a>
-<a href="#">DUNYO</a>
-<a href="#">SIYOSAT</a>
-<a href="#">IQTISODIYOT</a>
-<a href="#">TEXNOLOGIYA</a>
-<a href="#">SPORT</a>
+<a href="#" data-i18n="home">BOSH SAHIFA</a>
+<a href="#" data-i18n="uzbekistan">O‘ZBEKISTON</a>
+<a href="#" data-i18n="world">DUNYO</a>
+<a href="#" data-i18n="politics">SIYOSAT</a>
+<a href="#" data-i18n="economy">IQTISODIYOT</a>
+<a href="#" data-i18n="technology">TEXNOLOGIYA</a>
+<a href="#" data-i18n="sport">SPORT</a>
 </div>
 </nav>
 
 <div class="breaking">
-<strong>SO‘NGGI YANGILIKLAR</strong>
-<span>XABAR24UZ — Jahon yangiliklari</span>
+<strong data-i18n="breaking">SO‘NGGI YANGILIKLAR</strong>
+<span data-i18n="breakingText">XABAR24UZ — Jahon yangiliklari</span>
 </div>
 
 <main class="container">
 
 <section class="section-heading">
-<h1>ASOSIY YANGILIKLAR</h1>
-<span>JAHON AXBOROTI</span>
+<h1 data-i18n="mainNews">ASOSIY YANGILIKLAR</h1>
+<span data-i18n="information">JAHON AXBOROTI</span>
 </section>
 
 <section class="hero-grid">
 <article class="hero-card">
 <img src="https://images.unsplash.com/photo-1495020689067-958852a7765e?w=1200" alt="News">
 <div class="hero-caption">
-<span class="category">JAHON</span>
-<h2>XABAR24UZ — dunyo yangiliklari markazi</h2>
-<p>O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
+<span class="category" data-i18n="world">JAHON</span>
+<h2 data-i18n="heroTitle">XABAR24UZ — dunyo yangiliklari markazi</h2>
+<p data-i18n="heroText">O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.</p>
 </div>
 </article>
 
 <aside class="side-news">
-<h2>SO‘NGGI XABARLAR</h2>
-<article><span>O‘ZBEKISTON</span><h3>Mamlakatdagi muhim yangiliklar</h3></article>
-<article><span>JAHON</span><h3>Dunyodagi so‘nggi voqealar</h3></article>
-<article><span>IQTISODIYOT</span><h3>Jahon iqtisodiyotidagi yangiliklar</h3></article>
+<h2 data-i18n="latest">SO‘NGGI XABARLAR</h2>
+<article>
+<span data-i18n="uzbekistan">O‘ZBEKISTON</span>
+<h3 data-i18n="side1">Mamlakatdagi muhim yangiliklar</h3>
+</article>
+<article>
+<span data-i18n="world">JAHON</span>
+<h3 data-i18n="side2">Dunyodagi so‘nggi voqealar</h3>
+</article>
+<article>
+<span data-i18n="economy">IQTISODIYOT</span>
+<h3 data-i18n="side3">Jahon iqtisodiyotidagi yangiliklar</h3>
+</article>
 </aside>
 </section>
 
 <section class="section-heading">
-<h2>SO‘NGGI MAQOLALAR</h2>
+<h2 data-i18n="latestArticles">SO‘NGGI MAQOLALAR</h2>
 </section>
 
 <section id="newsList" class="dynamic-news">
-<p>Yangiliklar yuklanmoqda...</p>
+<p data-i18n="loading">Yangiliklar yuklanmoqda...</p>
 </section>
 
 </main>
 
-<!-- ADMIN BOSHQARUVI -->
+<!-- YASHIRIN ADMIN BOSHQARUVI -->
 <section class="admin-area" id="adminArea">
-
 <div class="admin-box">
 
 <h2>XABAR24UZ ADMIN</h2>
@@ -162,21 +180,20 @@
 <input type="password" id="adminPassword" placeholder="Parol">
 
 <button onclick="login()">KIRISH</button>
-<p id="loginMessage"></p>
+<p id="loginMessage" class="admin-message"></p>
 </div>
 
 <div id="adminPanel">
-
 <h3>Boshqaruv paneli</h3>
 
 <div class="admin-actions">
 <button onclick="showEditor()">+ MAQOLA QO‘SHISH</button>
-<button onclick="loadAdminNews()">MAQOLALARNI YANGILASH</button>
+<button onclick="loadAdminNews()">YANGILASH</button>
 <button onclick="logout()">CHIQISH</button>
 </div>
 
 <div id="editorPanel">
-
+<hr>
 <h3 id="editorTitle">Yangi maqola</h3>
 
 <input type="hidden" id="articleId">
@@ -206,31 +223,28 @@
 <input id="image_url" placeholder="https://...">
 
 <div class="admin-actions">
-<button onclick="saveArticle()">NASHR QILISH</button>
+<button onclick="saveArticle('published')">NASHR QILISH</button>
+<button onclick="saveArticle('draft')">QORALAMA SAQLASH</button>
 <button onclick="hideEditor()">BEKOR QILISH</button>
 </div>
 
-<p id="saveMessage"></p>
+<p id="saveMessage" class="admin-message"></p>
 </div>
 
 <hr>
-
 <h3>Maqolalarni boshqarish</h3>
 <div id="adminNewsList">Yuklanmoqda...</div>
-
 </div>
 </div>
 </section>
 
 <footer>
 <div class="footer-logo">XABAR<span>24</span>UZ</div>
-<p>O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
-<p>© 2026 XABAR24UZ. Barcha huquqlar himoyalangan.</p>
-
+<p data-i18n="footerText">O‘zbekiston va dunyo yangiliklari — uch tilda.</p>
+<p>© 2026 XABAR24UZ. <span data-i18n="rights">Barcha huquqlar himoyalangan.</span></p>
 <span class="admin-login" onclick="openAdmin()">ADMIN</span>
 </footer>
 
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="assets/config.js"></script>
 
@@ -243,62 +257,189 @@ const db = window.supabase.createClient(
 let currentLang = "uz";
 let currentUser = null;
 
+const translations = {
+uz: {
+tagline:"O‘ZBEKISTON VA DUNYO YANGILIKLARI",
+home:"BOSH SAHIFA",
+uzbekistan:"O‘ZBEKISTON",
+world:"JAHON",
+politics:"SIYOSAT",
+economy:"IQTISODIYOT",
+technology:"TEXNOLOGIYA",
+sport:"SPORT",
+breaking:"SO‘NGGI YANGILIKLAR",
+breakingText:"XABAR24UZ — O‘zbekiston va dunyo yangiliklari",
+mainNews:"ASOSIY YANGILIKLAR",
+information:"JAHON AXBOROTI",
+heroTitle:"XABAR24UZ — dunyo yangiliklari markazi",
+heroText:"O‘zbekiston va dunyodagi muhim voqealarni kuzatib boring.",
+latest:"SO‘NGGI XABARLAR",
+side1:"Mamlakatdagi muhim yangiliklar",
+side2:"Dunyodagi so‘nggi voqealar",
+side3:"Jahon iqtisodiyotidagi yangiliklar",
+latestArticles:"SO‘NGGI MAQOLALAR",
+loading:"Yangiliklar yuklanmoqda...",
+empty:"Hozircha maqolalar mavjud emas.",
+footerText:"O‘zbekiston va dunyo yangiliklari — uch tilda.",
+rights:"Barcha huquqlar himoyalangan."
+},
+ru: {
+tagline:"НОВОСТИ УЗБЕКИСТАНА И МИРА",
+home:"ГЛАВНАЯ",
+uzbekistan:"УЗБЕКИСТАН",
+world:"МИР",
+politics:"ПОЛИТИКА",
+economy:"ЭКОНОМИКА",
+technology:"ТЕХНОЛОГИИ",
+sport:"СПОРТ",
+breaking:"ПОСЛЕДНИЕ НОВОСТИ",
+breakingText:"XABAR24UZ — новости Узбекистана и мира",
+mainNews:"ГЛАВНЫЕ НОВОСТИ",
+information:"МИРОВАЯ ИНФОРМАЦИЯ",
+heroTitle:"XABAR24UZ — центр мировых новостей",
+heroText:"Следите за важными событиями в Узбекистане и мире.",
+latest:"ПОСЛЕДНИЕ СООБЩЕНИЯ",
+side1:"Важные новости страны",
+side2:"Последние события в мире",
+side3:"Новости мировой экономики",
+latestArticles:"ПОСЛЕДНИЕ СТАТЬИ",
+loading:"Загрузка новостей...",
+empty:"Пока нет опубликованных статей.",
+footerText:"Новости Узбекистана и мира — на трёх языках.",
+rights:"Все права защищены."
+},
+en: {
+tagline:"UZBEKISTAN AND WORLD NEWS",
+home:"HOME",
+uzbekistan:"UZBEKISTAN",
+world:"WORLD",
+politics:"POLITICS",
+economy:"ECONOMY",
+technology:"TECHNOLOGY",
+sport:"SPORT",
+breaking:"BREAKING NEWS",
+breakingText:"XABAR24UZ — Uzbekistan and world news",
+mainNews:"TOP STORIES",
+information:"WORLD INFORMATION",
+heroTitle:"XABAR24UZ — your world news center",
+heroText:"Follow important events in Uzbekistan and around the world.",
+latest:"LATEST NEWS",
+side1:"Important national news",
+side2:"Latest events around the world",
+side3:"World economy news",
+latestArticles:"LATEST ARTICLES",
+loading:"Loading news...",
+empty:"There are no published articles yet.",
+footerText:"Uzbekistan and world news — in three languages.",
+rights:"All rights reserved."
+}
+};
+
+function setLanguage(lang) {
+  if(!translations[lang]) return;
+
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll("[data-i18n]").forEach(element => {
+    const key = element.dataset.i18n;
+    if(translations[lang][key]) {
+      element.textContent = translations[lang][key];
+    }
+  });
+
+  document.querySelectorAll(".languages button").forEach(button => {
+    button.classList.toggle("active",button.dataset.lang === lang);
+  });
+
+  loadNews();
+}
+
+document.querySelectorAll(".languages button").forEach(button => {
+  button.addEventListener("click",() => {
+    setLanguage(button.dataset.lang);
+  });
+});
+
 function openAdmin() {
   document.getElementById("adminArea").style.display = "block";
 
-  if (!currentUser) {
-    document.getElementById("loginPanel").style.display = "block";
-    document.getElementById("adminPanel").style.display = "none";
-  } else {
+  if(currentUser) {
     document.getElementById("loginPanel").style.display = "none";
     document.getElementById("adminPanel").style.display = "block";
+    loadAdminNews();
+  } else {
+    document.getElementById("loginPanel").style.display = "block";
+    document.getElementById("adminPanel").style.display = "none";
   }
 
   document.getElementById("adminArea").scrollIntoView({
-    behavior: "smooth"
+    behavior:"smooth"
   });
 }
+
 function closeAdmin() {
   document.getElementById("adminArea").style.display = "none";
 }
 
 async function checkSession() {
-  const {data} = await db.auth.getSession();
+  const {data,error} = await db.auth.getSession();
+
+  if(error) {
+    console.error(error);
+    return;
+  }
+
   if(data.session) {
     currentUser = data.session.user;
-    showAdmin();
+    document.getElementById("adminArea").style.display = "block";
+    document.getElementById("loginPanel").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+    loadAdminNews();
   }
 }
 
 async function login() {
-  const email = document.getElementById("adminEmail").value;
+  const email = document.getElementById("adminEmail").value.trim();
   const password = document.getElementById("adminPassword").value;
+  const message = document.getElementById("loginMessage");
+
+  if(!email || !password) {
+    message.textContent = "Email va parolni kiriting.";
+    return;
+  }
+
+  message.textContent = "Tekshirilmoqda...";
 
   const {data,error} = await db.auth.signInWithPassword({
     email,password
   });
 
   if(error) {
-    document.getElementById("loginMessage").textContent = error.message;
+    message.textContent = "Kirish xatosi: " + error.message;
     return;
   }
 
   currentUser = data.user;
-  showAdmin();
-}
 
-function showAdmin() {
   document.getElementById("loginPanel").style.display = "none";
   document.getElementById("adminPanel").style.display = "block";
-  document.getElementById("adminArea").style.display = "block";
+
   loadAdminNews();
 }
 
 async function logout() {
-  await db.auth.signOut();
+  const {error} = await db.auth.signOut();
+
+  if(error) {
+    alert(error.message);
+    return;
+  }
+
   currentUser = null;
   document.getElementById("adminPanel").style.display = "none";
   document.getElementById("loginPanel").style.display = "block";
+  document.getElementById("loginMessage").textContent = "";
   closeAdmin();
 }
 
@@ -306,38 +447,48 @@ function showEditor() {
   document.getElementById("editorPanel").style.display = "block";
   document.getElementById("editorTitle").textContent = "Yangi maqola";
   document.getElementById("articleId").value = "";
+
   [
     "title_uz","content_uz","title_ru","content_ru",
     "title_en","content_en","source","image_url"
-  ].forEach(id => document.getElementById(id).value = "");
+  ].forEach(id => {
+    document.getElementById(id).value = "";
+  });
+
+  document.getElementById("saveMessage").textContent = "";
 }
 
 function hideEditor() {
   document.getElementById("editorPanel").style.display = "none";
 }
 
-async function saveArticle() {
-  if(!currentUser) return alert("Admin sifatida kiring.");
+async function saveArticle(status) {
+  if(!currentUser) {
+    alert("Avval admin sifatida kiring.");
+    return;
+  }
 
   const id = document.getElementById("articleId").value;
 
   const article = {
-    title_uz: document.getElementById("title_uz").value,
-    content_uz: document.getElementById("content_uz").value,
-    title_ru: document.getElementById("title_ru").value,
-    content_ru: document.getElementById("content_ru").value,
-    title_en: document.getElementById("title_en").value,
-    content_en: document.getElementById("content_en").value,
-    source: document.getElementById("source").value,
-    image_url: document.getElementById("image_url").value,
-    status: "published",
-    published_at: new Date().toISOString()
+    title_uz:document.getElementById("title_uz").value.trim(),
+    content_uz:document.getElementById("content_uz").value.trim(),
+    title_ru:document.getElementById("title_ru").value.trim(),
+    content_ru:document.getElementById("content_ru").value.trim(),
+    title_en:document.getElementById("title_en").value.trim(),
+    content_en:document.getElementById("content_en").value.trim(),
+    source:document.getElementById("source").value.trim(),
+    image_url:document.getElementById("image_url").value.trim(),
+    status:status,
+    published_at:status === "published" ? new Date().toISOString() : null
   };
 
   if(!article.title_uz || !article.content_uz) {
-    alert("O‘zbekcha sarlavha va matnni kiriting.");
+    alert("O‘zbekcha sarlavha va maqola matnini kiriting.");
     return;
   }
+
+  document.getElementById("saveMessage").textContent = "Saqlanmoqda...";
 
   let result;
 
@@ -356,7 +507,7 @@ async function saveArticle() {
   }
 
   document.getElementById("saveMessage").textContent =
-    "Maqola muvaffaqiyatli saqlandi!";
+    status === "published" ? "Maqola nashr qilindi!" : "Qoralama saqlandi!";
 
   hideEditor();
   await loadAdminNews();
@@ -364,20 +515,28 @@ async function saveArticle() {
 }
 
 async function loadAdminNews() {
+  if(!currentUser) return;
+
+  const box = document.getElementById("adminNewsList");
+  box.textContent = "Yuklanmoqda...";
+
   const {data,error} = await db.from("news")
     .select("*")
     .order("created_at",{ascending:false});
 
-  const box = document.getElementById("adminNewsList");
-
   if(error) {
-    box.textContent = error.message;
+    box.textContent = "Xatolik: " + error.message;
     return;
   }
 
   box.innerHTML = "";
 
-  (data || []).forEach(article => {
+  if(!data || data.length === 0) {
+    box.textContent = "Hozircha maqolalar yo‘q.";
+    return;
+  }
+
+  data.forEach(article => {
     const item = document.createElement("div");
     item.className = "admin-article";
 
@@ -385,7 +544,8 @@ async function loadAdminNews() {
     title.textContent = article.title_uz || "Sarlavhasiz";
 
     const status = document.createElement("p");
-    status.textContent = "Holati: " + article.status;
+    status.textContent = "Holati: " +
+      (article.status === "published" ? "Nashr qilingan" : "Qoralama");
 
     const edit = document.createElement("button");
     edit.textContent = "TAHRIRLASH";
@@ -414,12 +574,16 @@ function editArticle(article) {
 }
 
 async function deleteArticle(id) {
+  if(!currentUser) return;
+
   if(!confirm("Maqolani o‘chirishni xohlaysizmi?")) return;
 
-  const {error} = await db.from("news").delete().eq("id",id);
+  const {error} = await db.from("news")
+    .delete()
+    .eq("id",id);
 
   if(error) {
-    alert(error.message);
+    alert("O‘chirishda xatolik: " + error.message);
     return;
   }
 
@@ -429,6 +593,7 @@ async function deleteArticle(id) {
 
 async function loadNews() {
   const box = document.getElementById("newsList");
+  box.textContent = translations[currentLang].loading;
 
   const {data,error} = await db.from("news")
     .select("*")
@@ -444,15 +609,13 @@ async function loadNews() {
   box.innerHTML = "";
 
   if(!data || data.length === 0) {
-    box.textContent = "Hozircha maqolalar mavjud emas.";
+    box.textContent = translations[currentLang].empty;
     return;
   }
 
   data.forEach(article => {
-    const title = article["title_" + currentLang] ||
-                  article.title_uz;
-    const content = article["content_" + currentLang] ||
-                    article.content_uz;
+    const title = article["title_" + currentLang] || article.title_uz;
+    const content = article["content_" + currentLang] || article.content_uz;
 
     const card = document.createElement("article");
     card.className = "dynamic-card";
@@ -460,7 +623,8 @@ async function loadNews() {
     if(article.image_url) {
       const img = document.createElement("img");
       img.src = article.image_url;
-      img.alt = title;
+      img.alt = title || "XABAR24UZ";
+      img.loading = "lazy";
       card.appendChild(img);
     }
 
@@ -471,32 +635,17 @@ async function loadNews() {
     paragraph.textContent = content;
 
     const source = document.createElement("small");
-    source.textContent = article.source || "";
+    source.textContent = article.source ? "Manba: " + article.source : "";
 
     card.append(heading,paragraph,source);
     box.appendChild(card);
   });
 }
 
-function setLanguage(lang) {
-  currentLang = lang;
-  document.documentElement.lang = lang;
-
-  document.querySelectorAll(".languages button").forEach(button => {
-    button.classList.toggle("active",button.dataset.lang === lang);
-  });
-
-  loadNews();
-}
-
-document.querySelectorAll(".languages button").forEach(button => {
-  button.addEventListener("click",() => setLanguage(button.dataset.lang));
-});
-
 checkSession();
 loadNews();
 </script>
 
 </body>
-</html>
+  </html>
   
