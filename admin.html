@@ -1,1 +1,181 @@
-<!doctype html><html lang="uz"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>XABAR24UZ Admin</title><link rel="stylesheet" href="assets/style.css"></head><body><header><div class="logo"><b>XABAR</b>24UZ</div><p>Admin boshqaruv paneli</p></header><main><a href="index.html">← Saytga qaytish</a><section class="panel" id="login"><h1>Admin kirishi</h1><label>Email<input id="email" type="email"></label><label>Parol<input id="password" type="password"></label><button id="signIn">Kirish</button><p id="msg"></p></section><section class="panel hidden" id="desk"><h1>Yangilik qoralamalari</h1><button id="signOut">Chiqish</button><div id="drafts"></div></section></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="assets/config.js"></script><script src="assets/admin.js"></script></body></html>
+<!doctype html><html lang="uz"><head><meta charset="utf-8"><meta name=
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>XABAR24UZ — Admin</title>
+  <link rel="stylesheet" href="assets/admin.css">
+</head>
+<body>
+
+<div id="login" class="login-page">
+  <div class="login-box">
+    <div class="brand">XABAR<span>24UZ</span></div>
+    <p class="muted">NEWS CONTROL CENTER</p>
+    <h1>Admin tizimiga kirish</h1>
+
+    <label>Email</label>
+    <input id="email" type="email" placeholder="Admin email">
+
+    <label>Parol</label>
+    <input id="password" type="password" placeholder="Parol">
+
+    <button id="signIn" class="btn red full">Kirish</button>
+    <p id="msg" class="message"></p>
+  </div>
+</div>
+
+<div id="desk" class="hidden">
+  <header class="topbar">
+    <div class="brand">XABAR<span>24UZ</span></div>
+    <div class="top-right">
+      <span class="live-dot">ADMIN PANEL</span>
+      <a href="index.html">Saytni ko‘rish ↗</a>
+      <button id="signOut" class="btn dark">Chiqish</button>
+    </div>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="side-label">BOSHQARUV</div>
+      <a href="#dashboard" class="active">▦ Bosh sahifa</a>
+      <a href="#editor">✚ Yangi yangilik</a>
+      <a href="#news">▤ Barcha yangiliklar</a>
+      <a href="#news">◷ Qoralamalar</a>
+      <a href="#settings">⚙ Sozlamalar</a>
+      <div class="side-bottom">XABAR24UZ<br><small>NEWSROOM © 2026</small></div>
+    </aside>
+
+    <main class="main-content">
+
+      <section id="dashboard">
+        <div class="page-heading">
+          <div>
+            <div class="eyebrow">BOSHQARUV MARKAZI</div>
+            <h1>Bosh sahifa</h1>
+            <p>Yangiliklar faoliyati va boshqaruvi</p>
+          </div>
+          <a href="#editor" class="btn red">+ Yangi yangilik</a>
+        </div>
+
+        <div class="stats">
+          <div class="stat-card">
+            <span>JAMI YANGILIKLAR</span>
+            <strong id="totalNews">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>E’LON QILINGAN</span>
+            <strong id="publishedNews">0</strong>
+          </div>
+          <div class="stat-card">
+            <span>QORALAMALAR</span>
+            <strong id="draftNews">0</strong>
+          </div>
+        </div>
+      </section>
+
+      <section id="editor" class="section-card">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">NEWSROOM</div>
+            <h2 id="editorTitle">Yangi yangilik yaratish</h2>
+          </div>
+          <span class="tag">EDITOR</span>
+        </div>
+
+        <form id="newsForm">
+          <input type="hidden" id="newsId">
+
+          <div class="field">
+            <label>O‘zbekcha sarlavha *</label>
+            <input id="title_uz" required placeholder="Yangilik sarlavhasi">
+          </div>
+
+          <div class="field">
+            <label>O‘zbekcha matn</label>
+            <textarea id="content_uz" rows="5" placeholder="Yangilik matni"></textarea>
+          </div>
+
+          <div class="language-grid">
+            <div class="field">
+              <label>Ruscha sarlavha</label>
+              <input id="title_ru" placeholder="Заголовок">
+            </div>
+            <div class="field">
+              <label>Inglizcha sarlavha</label>
+              <input id="title_en" placeholder="News headline">
+            </div>
+            <div class="field">
+              <label>Ruscha matn</label>
+              <textarea id="content_ru" rows="5" placeholder="Текст новости"></textarea>
+            </div>
+            <div class="field">
+              <label>Inglizcha matn</label>
+              <textarea id="content_en" rows="5" placeholder="News content"></textarea>
+            </div>
+          </div>
+
+          <div class="language-grid">
+            <div class="field">
+              <label>Manba</label>
+              <input id="source" placeholder="Masalan: Reuters, BBC">
+            </div>
+            <div class="field">
+              <label>Rasm havolasi</label>
+              <input id="image_url" type="url" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="saveDraft" class="btn dark">Qoralama saqlash</button>
+            <button type="button" id="publishNow" class="btn red">Saqlash va e’lon qilish</button>
+            <button type="button" id="cancelEdit" class="btn light hidden">Bekor qilish</button>
+          </div>
+          <p id="formMsg" class="message"></p>
+        </form>
+      </section>
+
+      <section id="news" class="section-card">
+        <div class="section-heading">
+          <div>
+            <div class="eyebrow">MA’LUMOTLAR BAZASI</div>
+            <h2>Barcha yangiliklar</h2>
+          </div>
+          <span class="tag">NEWS LIST</span>
+        </div>
+
+        <div class="filters">
+          <input id="searchNews" placeholder="Yangilik qidirish...">
+          <select id="statusFilter">
+            <option value="all">Barchasi</option>
+            <option value="published">E’lon qilingan</option>
+            <option value="draft">Qoralamalar</option>
+          </select>
+          <button id="refreshNews" class="btn light">Yangilash</button>
+        </div>
+
+        <div id="newsList">
+          Yangiliklar yuklanmoqda...
+        </div>
+      </section>
+
+      <section id="settings" class="section-card">
+        <div class="eyebrow">TIZIM</div>
+        <h2>Sozlamalar</h2>
+        <p>Saytning ommaviy sahifasiga qaytish uchun:</p>
+        <a href="index.html" class="btn red">XABAR24UZ saytiga o‘tish</a>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<footer class="footer">XABAR24UZ © 2026 — NEWS CONTROL CENTER</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="assets/config.js"></script>
+<script src="assets/admin.js"></script>
+</body>
+  </html>
+  
