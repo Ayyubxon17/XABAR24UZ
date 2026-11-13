@@ -245,9 +245,19 @@ let currentUser = null;
 
 function openAdmin() {
   document.getElementById("adminArea").style.display = "block";
-  document.getElementById("adminArea").scrollIntoView();
-}
 
+  if (!currentUser) {
+    document.getElementById("loginPanel").style.display = "block";
+    document.getElementById("adminPanel").style.display = "none";
+  } else {
+    document.getElementById("loginPanel").style.display = "none";
+    document.getElementById("adminPanel").style.display = "block";
+  }
+
+  document.getElementById("adminArea").scrollIntoView({
+    behavior: "smooth"
+  });
+}
 function closeAdmin() {
   document.getElementById("adminArea").style.display = "none";
 }
