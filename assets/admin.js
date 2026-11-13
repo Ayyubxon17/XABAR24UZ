@@ -1,3 +1,4 @@
+
 const client = window.supabase.createClient(
   window.SUPABASE_URL,
   window.SUPABASE_ANON_KEY
@@ -18,6 +19,7 @@ const fields = [
   "image_url"
 ];
 
+// Tugmalar va maydonlarni ulash
 $("signIn").addEventListener("click", signIn);
 $("signOut").addEventListener("click", signOut);
 $("newsForm").addEventListener("submit", saveDraft);
@@ -27,8 +29,17 @@ $("refreshNews").addEventListener("click", loadNews);
 $("searchNews").addEventListener("input", renderNews);
 $("statusFilter").addEventListener("change", renderNews);
 
+// Xabar ko‘rsatish
+function showMessage(id, message) {
+  $(id).textContent = message;
+}
+
+// LOGIN
 async function signIn() {
-  $("msg").textContent = "Tekshirilmoqda...";
+  const button = $("signIn");
+
+  button.disabled = true;
+  showMessage("msg", "Tekshirilmoqda...");
 
   try {
     const { error } = await client.auth.signInWithPassword({
@@ -38,32 +49,45 @@ async function signIn() {
 
     if (error) throw error;
 
+    $("password").value = "";
     await showDashboard();
+
   } catch (error) {
-    $("msg").textContent = "Kirish xatosi: " + error.message;
+    showMessage("msg", "Kirish xatosi: " + error.message);
+  } finally {
+    button.disabled = false;
   }
 }
 
+// LOGOUT
 async function signOut() {
+  if (!confirm("Admin tizimidan chiqmoqchimisiz?")) return;
+
   const { error } = await client.auth.signOut();
 
   if (error) {
-    alert(error.message);
+    alert("Chiqish xatosi: " + error.message);
     return;
   }
 
   $("desk").classList.add("hidden");
   $("login").classList.remove("hidden");
+  showMessage("msg", "Tizimdan chiqildi.");
 }
 
+// DASHBOARD
 async function showDashboard() {
   $("login").classList.add("hidden");
   $("desk").classList.remove("hidden");
+
   await loadNews();
 }
 
+// YANGILIKLARNI YUKLASH
 async function loadNews() {
   $("newsList").textContent = "Yangiliklar yuklanmoqda...";
+
+  $("refreshNews").disabled = true;
 
   try {
     const { data, error } = await client
@@ -74,39 +98,52 @@ async function loadNews() {
     if (error) throw error;
 
     allNews = data || [];
+
     updateStats();
     renderNews();
+
   } catch (error) {
     $("newsList").textContent =
-      "Xatolik: " + error.message;
+      "Ma’lumot yuklash xatosi: " + error.message;
+  } finally {
+    $("refreshNews").disabled = false;
   }
 }
 
+// STATISTIKA
 function updateStats() {
   $("totalNews").textContent = allNews.length;
+
   $("publishedNews").textContent =
-    allNews.filter(n => n.status === "published").length;
+    allNews.filter(item => item.status === "published").length;
+
   $("draftNews").textContent =
-    allNews.filter(n => n.status === "draft").length;
+    allNews.filter(item => item.status === "draft").length;
 }
 
+// YANGILIKLAR RO‘YXATI
 function renderNews() {
   const list = $("newsList");
   list.replaceChildren();
 
-  const search = $("searchNews").value.toLowerCase().trim();
+  const search = $("searchNews").value
+    .toLowerCase()
+    .trim();
+
   const filter = $("statusFilter").value;
 
   const items = allNews.filter(item => {
     const matchesStatus =
       filter === "all" || item.status === filter;
 
-    const matchesSearch =
-      (item.title_uz || "").toLowerCase().includes(search) ||
-      (item.title_ru || "").toLowerCase().includes(search) ||
-      (item.title_en || "").toLowerCase().includes(search);
+    const text = [
+      item.title_uz,
+      item.title_ru,
+      item.title_en,
+      item.source
+    ].join(" ").toLowerCase();
 
-    return matchesStatus && matchesSearch;
+    return matchesStatus && text.includes(search);
   });
 
   if (!items.length) {
@@ -119,34 +156,52 @@ function renderNews() {
     card.className = "news-item";
 
     const badge = document.createElement("span");
+
     badge.className =
-      "status " + (item.status === "published" ? "published" : "draft");
+      "status " +
+      (item.status === "published" ? "published" : "draft");
+
     badge.textContent =
-      item.status === "published" ? "E’LON QILINGAN" : "QORALAMA";
+      item.status === "published"
+        ? "E’LON QILINGAN"
+        : "QORALAMA";
 
     const title = document.createElement("h3");
     title.textContent = item.title_uz || "Sarlavhasiz";
 
     const meta = document.createElement("div");
     meta.className = "news-meta";
+
+    const date = item.created_at
+      ? new Date(item.created_at).toLocaleDateString("uz-UZ")
+      : "Noma’lum";
+
     meta.textContent =
       "Manba: " + (item.source || "Ko‘rsatilmagan") +
-      " | Sana: " + new Date(item.created_at).toLocaleDateString("uz-UZ");
+      " | Sana: " + date;
 
     const actions = document.createElement("div");
     actions.className = "news-actions";
 
-    const edit = makeButton("Tahrirlash", "light", () => editNews(item));
-    actions.append(edit);
+    actions.append(
+      makeButton("Tahrirlash", "light", () => editNews(item))
+    );
 
     if (item.status === "draft") {
       actions.append(
-        makeButton("E’lon qilish", "red", () => changeStatus(item, "published"))
+        makeButton(
+          "E’lon qilish",
+          "red",
+          () => changeStatus(item, "published")
+        )
       );
     } else {
       actions.append(
-        makeButton("Qoralamaga qaytarish", "dark",
-          () => changeStatus(item, "draft"))
+        makeButton(
+          "Qoralamaga qaytarish",
+          "dark",
+          () => changeStatus(item, "draft")
+        )
       );
     }
 
@@ -159,15 +214,19 @@ function renderNews() {
   });
 }
 
+// TUGMA YASASH
 function makeButton(label, style, action) {
   const button = document.createElement("button");
+
   button.type = "button";
   button.className = "btn " + style;
   button.textContent = label;
   button.addEventListener("click", action);
+
   return button;
 }
 
+// FORM MA’LUMOTLARI
 function getFormData() {
   const data = {};
 
@@ -178,12 +237,16 @@ function getFormData() {
   return data;
 }
 
+// QORALAMA SAQLASH
 async function saveDraft(event) {
   event.preventDefault();
   await saveNews("draft");
 }
 
+// E’LON QILISH
 async function publishFromForm() {
+  if (!$("newsForm").reportValidity()) return;
+
   if (!confirm("Ushbu yangilikni e’lon qilmoqchimisiz?")) {
     return;
   }
@@ -191,15 +254,12 @@ async function publishFromForm() {
   await saveNews("published");
 }
 
+// YANGILIKNI SAQLASH
 async function saveNews(status) {
-  const title = $("title_uz").value.trim();
-
-  if (!title) {
-    $("formMsg").textContent = "O‘zbekcha sarlavhani kiriting.";
-    return;
-  }
+  if (!$("newsForm").reportValidity()) return;
 
   const id = $("newsId").value;
+
   const data = {
     ...getFormData(),
     status,
@@ -208,7 +268,12 @@ async function saveNews(status) {
       : null
   };
 
-  $("formMsg").textContent = "Saqlanmoqda...";
+  const saveButton = status === "draft"
+    ? $("saveDraft")
+    : $("publishNow");
+
+  saveButton.disabled = true;
+  showMessage("formMsg", "Saqlanmoqda...");
 
   try {
     let result;
@@ -226,18 +291,24 @@ async function saveNews(status) {
 
     if (result.error) throw result.error;
 
-    $("formMsg").textContent =
+    showMessage(
+      "formMsg",
       status === "published"
         ? "Yangilik e’lon qilindi!"
-        : "Qoralama saqlandi!";
+        : "Qoralama saqlandi!"
+    );
 
     resetForm();
     await loadNews();
+
   } catch (error) {
-    $("formMsg").textContent = "Saqlash xatosi: " + error.message;
+    showMessage("formMsg", "Saqlash xatosi: " + error.message);
+  } finally {
+    saveButton.disabled = false;
   }
 }
 
+// MAQOLANI TAHRIRLASH
 function editNews(item) {
   $("newsId").value = item.id;
 
@@ -248,18 +319,24 @@ function editNews(item) {
   $("editorTitle").textContent = "Yangilikni tahrirlash";
   $("cancelEdit").classList.remove("hidden");
 
-  document.getElementById("editor").scrollIntoView({
+  $("editor").scrollIntoView({
     behavior: "smooth"
   });
+
+  showMessage("formMsg", "Maqola tahrirlash uchun ochildi.");
 }
 
+// FORMNI TOZALASH
 function resetForm() {
   $("newsForm").reset();
   $("newsId").value = "";
-  $("editorTitle").textContent = "Yangi yangilik yaratish";
+
+  $("editorTitle").textContent = "Yangi maqola yaratish";
+
   $("cancelEdit").classList.add("hidden");
 }
 
+// STATUSNI O‘ZGARTIRISH
 async function changeStatus(item, status) {
   const question = status === "published"
     ? "Yangilikni e’lon qilasizmi?"
@@ -267,40 +344,48 @@ async function changeStatus(item, status) {
 
   if (!confirm(question)) return;
 
-  const { error } = await client
-    .from("news")
-    .update({
-      status,
-      published_at: status === "published"
-        ? new Date().toISOString()
-        : null
-    })
-    .eq("id", item.id);
+  try {
+    const { error } = await client
+      .from("news")
+      .update({
+        status,
+        published_at: status === "published"
+          ? new Date().toISOString()
+          : null
+      })
+      .eq("id", item.id);
 
-  if (error) {
+    if (error) throw error;
+
+    await loadNews();
+
+  } catch (error) {
     alert("Xatolik: " + error.message);
-    return;
   }
-
-  await loadNews();
 }
 
+// YANGILIKNI O‘CHIRISH
 async function deleteNews(item) {
-  if (!confirm("Bu yangilik butunlay o‘chirilsinmi?")) return;
-
-  const { error } = await client
-    .from("news")
-    .delete()
-    .eq("id", item.id);
-
-  if (error) {
-    alert("O‘chirish xatosi: " + error.message);
+  if (!confirm("Bu yangilik butunlay o‘chirilsinmi?")) {
     return;
   }
 
-  await loadNews();
+  try {
+    const { error } = await client
+      .from("news")
+      .delete()
+      .eq("id", item.id);
+
+    if (error) throw error;
+
+    await loadNews();
+
+  } catch (error) {
+    alert("O‘chirish xatosi: " + error.message);
+  }
 }
 
+// AVVALGI LOGIN HOLATINI TEKSHIRISH
 async function checkSession() {
   try {
     const { data, error } = await client.auth.getSession();
@@ -310,13 +395,15 @@ async function checkSession() {
     if (data.session) {
       await showDashboard();
     } else {
-      $("login").classList.remove("hidden");
       $("desk").classList.add("hidden");
+      $("login").classList.remove("hidden");
     }
+
   } catch (error) {
-    $("msg").textContent = "Sessiya xatosi: " + error.message;
+    showMessage("msg", "Sessiya xatosi: " + error.message);
   }
 }
 
+// ISHGA TUSHIRISH
 checkSession();
-        
+  
