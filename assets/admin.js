@@ -9,9 +9,46 @@ const desk = document.getElementById("desk");
 const msg = document.getElementById("msg");
 const drafts = document.getElementById("drafts");
 
-document.getElementById("signIn").addEventListener("click", signIn);
-document.getElementById("signOut").addEventListener("click", signOut);
+// PAROLNI TIKLASH
+client.auth.onAuthStateChange((event) => {
+  if (event === "PASSWORD_RECOVERY") {
+    setTimeout(async () => {
+      const newPassword = prompt(
+        "Yangi parolni kiriting (kamida 8 belgi):"
+      );
 
+      if (!newPassword || newPassword.length < 8) {
+        alert("Parol kamida 8 belgidan iborat bo‘lishi kerak.");
+        return;
+      }
+
+      const { error } = await client.auth.updateUser({
+        password: newPassword
+      });
+
+      if (error) {
+        alert("Xatolik: " + error.message);
+        return;
+      }
+
+      alert("Parol muvaffaqiyatli yangilandi!");
+
+      await client.auth.signOut();
+
+      desk.classList.add("hidden");
+      login.classList.remove("hidden");
+    }, 100);
+  }
+});
+
+// TUGMALAR
+document.getElementById("signIn")
+  .addEventListener("click", signIn);
+
+document.getElementById("signOut")
+  .addEventListener("click", signOut);
+
+// ADMIN KIRISHI
 async function signIn() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value;
@@ -31,19 +68,24 @@ async function signIn() {
   await showDashboard();
 }
 
+// CHIQISH
 async function signOut() {
   await client.auth.signOut();
+
   desk.classList.add("hidden");
   login.classList.remove("hidden");
   msg.textContent = "";
 }
 
+// ADMIN PANEL
 async function showDashboard() {
   login.classList.add("hidden");
   desk.classList.remove("hidden");
+
   await loadNews();
 }
 
+// YANGILIKLARNI YUKLASH
 async function loadNews() {
   drafts.textContent = "Yangiliklar yuklanmoqda...";
 
@@ -73,7 +115,9 @@ async function loadNews() {
 
     const status = document.createElement("p");
     status.textContent =
-      item.status === "published" ? "E’lon qilingan" : "Qoralama";
+      item.status === "published"
+        ? "E’lon qilingan"
+        : "Qoralama";
 
     const content = document.createElement("p");
     content.textContent = item.content_uz || "";
@@ -83,7 +127,10 @@ async function loadNews() {
     if (item.status === "draft") {
       const publish = document.createElement("button");
       publish.textContent = "E’lon qilish";
-      publish.addEventListener("click", () => publishNews(item.id));
+
+      publish.addEventListener("click", () => {
+        publishNews(item.id);
+      });
 
       card.append(publish);
     }
@@ -92,8 +139,11 @@ async function loadNews() {
   });
 }
 
+// YANGILIKNI E’LON QILISH
 async function publishNews(id) {
-  if (!confirm("Ushbu yangilikni e’lon qilmoqchimisiz?")) return;
+  if (!confirm("Ushbu yangilikni e’lon qilmoqchimisiz?")) {
+    return;
+  }
 
   const { error } = await client
     .from("news")
@@ -109,9 +159,11 @@ async function publishNews(id) {
   }
 
   alert("Yangilik e’lon qilindi!");
+
   await loadNews();
 }
 
+// OLDINDAN KIRILGAN ADMINNI TEKSHIRISH
 async function checkSession() {
   const { data } = await client.auth.getSession();
 
@@ -121,4 +173,4 @@ async function checkSession() {
 }
 
 checkSession();
-      
+    
