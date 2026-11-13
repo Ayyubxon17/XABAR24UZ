@@ -291,3 +291,50 @@ footer {
   }
   }
 
+/* ADMIN PANEL */
+.hidden {
+  display: none !important;
+}
+
+#login,
+#desk {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 25px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 3px 15px #0002;
+}
+
+#login label {
+  display: block;
+  margin: 15px 0;
+  font-weight: bold;
+}
+
+#login input {
+  display: block;
+  width: 100%;
+  padding: 13px;
+  margin-top: 7px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login button,
+#desk button {
+  background: #d71920;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 4px;
+}
+
+#desk .panel {
+  background: #f7f7f7;
+  padding: 18px;
+  margin: 15px 0;
+  border-left: 4px solid #d71920;
+}
