@@ -600,6 +600,128 @@ async function deleteArticle(id) {
   await loadNews();
 }
 
+
+async function loadNewsQueue() {
+  if (!currentUser) return;
+
+  const box = document.getElementById("newsQueueList");
+  box.textContent = "Yangiliklar yuklanmoqda...";
+
+  const { data, error } = await db
+    .from("news_queue")
+    .select("*")
+    .eq("status", "pending")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    box.textContent = "Xatolik: " + error.message;
+    return;
+  }
+
+  box.innerHTML = "";
+
+  if (!data || data.length === 0) {
+    box.textContent = "Hozircha yangi yangiliklar yo‘q.";
+    return;
+  }
+
+  data.forEach(article => {
+    const item = document.createElement("div");
+    item.className = "admin-article";
+
+    const title = document.createElement("h3");
+    title.textContent = article.original_title || "Sarlavha yo‘q";
+
+    const summary = document.createElement("p");
+    summary.textContent = article.original_summary || article.summary_uz || "";
+
+    const source = document.createElement("p");
+    source.textContent = "Manba: " + (article.source || "Noma’lum");
+
+    const link = document.createElement("a");
+    link.textContent = "Asl xabarni ochish";
+    link.href = article.source_url || "#";
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+
+    const approve = document.createElement("button");
+    approve.textContent = "TASDIQLASH";
+    approve.onclick = () => approveQueueItem(article);
+
+    const reject = document.createElement("button");
+    reject.textContent = "RAD ETISH";
+    reject.onclick = () => rejectQueueItem(article.id);
+
+    item.append(title, summary, source, link, document.createElement("br"), approve, reject);
+    box.appendChild(item);
+  });
+}
+
+async function approveQueueItem(article) {
+  if (!currentUser) return;
+
+  const title = article.original_title || article.title_uz;
+
+  if (!title) {
+    alert("Bu yangilikda sarlavha yo‘q.");
+    return;
+  }
+
+  if (!confirm("Bu yangilikni qoralamaga o‘tkazishni xohlaysizmi?")) return;
+
+  const { error: insertError } = await db.from("news").insert({
+    title_uz: "[Tarjima kerak] " + title,
+    content_uz: article.original_summary || article.summary_uz || "",
+    source: article.source || "",
+    image_url: article.image_url || "",
+    status: "draft"
+  });
+
+  if (insertError) {
+    alert("Saqlashda xatolik: " + insertError.message);
+    return;
+  }
+
+  const { error } = await db
+    .from("news_queue")
+    .update({
+      status: "approved",
+      reviewed_at: new Date().toISOString()
+    })
+    .eq("id", article.id);
+
+  if (error) {
+    alert("Qoralama saqlandi, lekin navbat holatini yangilashda xatolik: " + error.message);
+    return;
+  }
+
+  alert("Yangilik qoralamaga saqlandi!");
+  await loadNewsQueue();
+  await loadAdminNews();
+}
+
+async function rejectQueueItem(id) {
+  if (!currentUser) return;
+
+  if (!confirm("Bu yangilikni rad etasizmi?")) return;
+
+  const { error } = await db
+    .from("news_queue")
+    .update({
+      status: "rejected",
+      reviewed_at: new Date().toISOString()
+    })
+    .eq("id", id);
+
+  if (error) {
+    alert("Xatolik: " + error.message);
+    return;
+  }
+
+  alert("Yangilik rad etildi.");
+  await loadNewsQueue();
+}
+  
 async function loadNews() {
   const box = document.getElementById("newsList");
   box.textContent = translations[currentLang].loading;
