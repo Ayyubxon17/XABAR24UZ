@@ -768,8 +768,21 @@ async function loadNews() {
     const source = document.createElement("small");
     source.textContent = article.source ? "Manba: " + article.source : "";
 
-    card.append(heading,paragraph,source);
-    box.appendChild(card);
+    if(article.video_url) {
+  const video = document.createElement("video");
+  video.src = article.video_url;
+  video.controls = true;
+  video.preload = "metadata";
+  video.playsInline = true;
+  video.style.width = "100%";
+  video.style.maxHeight = "420px";
+  video.style.borderRadius = "10px";
+  video.style.marginTop = "12px";
+  card.appendChild(video);
+}
+
+card.append(heading, paragraph, source);
+box.appendChild(card);
   });
 }
 
