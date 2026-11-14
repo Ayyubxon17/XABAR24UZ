@@ -671,9 +671,13 @@ async function approveQueueItem(article) {
 
   const { error: insertError } = await db.from("news").insert({
     title_uz: "[Tarjima kerak] " + title,
-    content_uz: article.original_summary || article.summary_uz || "",
+    content_uz:
+      article.original_content ||
+      article.original_summary ||
+      article.summary_uz || "",
     source: article.source || "",
     image_url: article.image_url || "",
+    video_url: article.video_url || "",
     status: "draft"
   });
 
@@ -695,10 +699,11 @@ async function approveQueueItem(article) {
     return;
   }
 
-  alert("Yangilik qoralamaga saqlandi!");
+  alert("Yangilik rasm va video ma'lumotlari bilan qoralamaga saqlandi!");
   await loadNewsQueue();
   await loadAdminNews();
-}
+                                             }
+  
 
 async function rejectQueueItem(id) {
   if (!currentUser) return;
