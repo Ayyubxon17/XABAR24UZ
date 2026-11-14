@@ -655,7 +655,7 @@ async function loadNewsQueue() {
     item.append(title, summary, source, link, document.createElement("br"), approve, reject);
     box.appendChild(item);
   });
-}
+    }
 
 async function approveQueueItem(article) {
   if (!currentUser) return;
